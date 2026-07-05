@@ -2,19 +2,21 @@
 compatibility: Claude.ai, Claude Chat, Claude Code
 metadata:
   "Built and maintained": "Darrin Southern from CadenceUX"
-  version: "1.2"
+  version: "1.3"
 name: goya-be-plugin
 description: |
   Reference skill for the BaseElements Plugin by Goya Pty Ltd — a free, open-source
   FileMaker Pro plugin with 129 active functions covering file I/O, HTTP/curl, SMTP,
   XML/XSLT, JSON, PDF, encryption, clipboard, containers, value lists, arrays, regex,
-  JavaScript evaluation, and vector similarity. Includes deprecated and renamed functions
-  with their replacements. Use whenever any BE_ function name appears in a FileMaker
-  calculation or script, or when the user asks about BaseElements, the BE plugin, or
-  plugin-based HTTP, file, XML, or email operations in FileMaker. The reference file is
-  a JSON catalog (references/function-catalog.json) — each function entry includes its
-  signature, notes, and a direct GitHub doc URL for live fetching. Do not use for MBS
-  Plugin or other FileMaker plugins.
+  JavaScript evaluation, and vector similarity, plus the plugin's named constants
+  (BE_ButtonOK, BE_FileTypeFolder, encoding and digest-algorithm values). Includes
+  deprecated and renamed functions with their replacements. Use whenever any BE_
+  function or constant name appears in a FileMaker calculation or script, or when the
+  user asks about BaseElements, the BE plugin, or plugin-based HTTP, file, XML, or
+  email operations in FileMaker. The reference file is a JSON catalog
+  (references/function-catalog.json) — each function entry includes its signature,
+  notes, and a direct GitHub doc URL for live fetching. Do not use for MBS Plugin or
+  other FileMaker plugins.
 ---
 
 # BaseElements Plugin — Reference Skill
@@ -32,6 +34,15 @@ The function reference is in `references/function-catalog.json`. As of v1.1 each
 Some entries carry a `doc_bug_note` field — these are cases where Goya's own doc page has a signature line naming a different function than its heading/filename (a copy/paste error upstream). The function name has been corrected in the entry; the note preserves what was actually on the page.
 
 Deprecated functions have `status: "deprecated"`, renamed functions have `status: "renamed"`, and fully removed functions have `status: "removed"`. Check the deprecated array before suggesting any legacy BE_ function.
+
+The catalog's `constants` block holds the plugin's **named constants** (from the vendor's
+`Constants.md` page) — zero-parameter functions used in place of magic numbers: dialog button
+results (`BE_ButtonOK` = 1, `BE_ButtonCancel` = 2, `BE_ButtonAlternate` = 3 — check these when
+branching on `BE_DialogDisplay`'s result), file-type filters for `BE_FileListFolder`
+(`BE_FileTypeAll`/`BE_FileType_File`/`BE_FileTypeFolder`), and the encoding and
+digest-algorithm values for `BE_MessageDigest`. Prefer the named constant over its numeric
+value in generated calculations. Note the upstream doc bug flagged on `BE_ButtonOK` (its
+Constants.md description is a copy/paste of the alternate-button row).
 
 ---
 
@@ -59,6 +70,16 @@ function doesn't seem to exist that should, or before recommending a rebuild:
 
 4. Don't flag a newer beta/pre-release tag alone — wait for it to ship stable.
 5. Still answer using the local catalog — the flag is advisory, not a blocker.
+
+**Enumeration drift (new functions in docs without a plugin release):** docs pages can be
+added ahead of a stable release, which the releases check above can't see. One extra API call
+catches it: `GET https://api.github.com/repos/GoyaPtyLtd/BaseElements-Plugin/contents/docs/Functions`
+and count the `.md` files, comparing against `meta.active_docs_page_count_at_build` (the same
+check works for the `Deprecated/` subfolder against `meta.deprecated_docs_page_count_at_build`).
+A higher live count means new pages exist that this catalog hasn't ingested. Two pages in the
+folder are not functions — `Constants.md` (catalogued in the `constants` block) and
+`FunctionTemplate.md` (the vendor's authoring template) — so don't flag those as missing
+functions when reconciling names.
 
 ---
 
@@ -92,7 +113,7 @@ run once:
 
 1. Fetch `https://github.com/CadenceUX/goya-be-plugin-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.2"`)
+3. Compare with this skill's installed version (currently `"1.3"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**
@@ -281,3 +302,5 @@ Check `BE_GetLastError` after `BE_SMTPSend`.
 ## Licence
 
 This skill is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-southern/) from [CadenceUX](https://cadenceux.com.au).

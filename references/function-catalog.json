@@ -1,7 +1,7 @@
 {
   "meta": {
     "skill": "goya-be-plugin",
-    "version": "v1.2",
+    "version": "v1.3",
     "plugin_name": "BaseElements Plugin",
     "vendor": "Goya Pty Ltd",
     "license": "open-source (free)",
@@ -13,11 +13,16 @@
     "catalog_entry_count": 133,
     "cross_listed_note": "4 functions appear in multiple categories (BE_CurlTrace, BE_FileSaveDialog, BE_FileSelectDialog, BE_FolderSelectDialog) matching the GitHub docs layout.",
     "usage_note": "Each entry is self-contained: description, structured parameters (optional/default flags reconciled against the signature brace-group, since prose annotations on doc pages are sometimes incomplete), keywords, version_history, notes (paragraphs), compatibility (platform table), and example_code (verbatim, null if the doc page has none). The url field points at the raw .md source for cross-checking. Entries with a doc_bug_note field had a signature whose leading identifier did not match the page heading/filename in the upstream source (copy/paste error) — the function name was corrected, the original as-fetched text is preserved in the note.",
-    "last_updated": "2026-06-30 (v1.2 — full live rebuild: all 123 active + 11 deprecated pages fetched and parsed; 6 functions subsequently added: BE_CreateKeyPair, BE_CurlGetInfo, BE_DecryptWithKey, BE_EncryptWithKey, BE_GetPublicKey, BE_JSON_jq)",
+    "last_updated": "2026-07-05",
     "update_instructions": "Re-run the fetch+parse pass periodically: 1) fetch docs_index (raw .md, not the github.com HTML page — HTML loses structure when pulled through a web-fetch/summarizer tool); 2) diff its BE_ link list against this catalog's names to find additions/removals (the \"Constants\" heading links to a separate reference page, not a function list — skip it); 3) for new or changed names, fetch the individual page via url_pattern/deprecated_url_pattern and parse the Description/Parameters/Keywords/Version History/Notes/Compatibility/Example Code sections (each is a **Bold** line heading followed by its content — deprecated pages omit the Compatibility section and the leading \"## \" on the title). Cross-check each parameter's optional flag against the signature's { } brace-group, since per-parameter \"(optional)\" annotations in the prose are sometimes missing even when the signature marks the param optional (e.g. BE_CipherDecrypt's fileNameWithExtension). Also verify the signature's leading identifier matches the page filename/heading — at least 6 pages had a copy-pasted signature naming a different function (see doc_bug_note fields); correct the name, keep the real parameter list, and note the discrepancy rather than silently trusting it. Known unrelated upstream doc bug: BE_SignatureVerifyRSA's signature has an unmatched brace (opens { but closes with ) not }) — left as-is rather than silently corrected.",
     "schema_note": "v1.1 schema: each function entry includes description, parameters (structured), keywords, version_history, notes (array of paragraphs), compatibility (platform support), and example_code (raw, may be null if the doc page has no example). url points at the raw .md file on raw.githubusercontent.com.",
     "plugin_version_at_build": "5.1.0.6",
-    "plugin_version_check": "plugin_version_at_build records the latest STABLE BaseElements Plugin release at the time this catalog was built (v5.1.0.6, published 2026-04-15). To check for drift: GET https://api.github.com/repos/GoyaPtyLtd/BaseElements-Plugin/releases?per_page=20 and find the highest tag whose version string contains no letters after stripping the leading \"v\" (e.g. v5.1.0.6, v5.1.0.5). Tags with a letter suffix (e.g. v5.1.0b3) are beta/pre-release builds despite the API's prerelease flag sometimes reporting false for them — confirm by checking the release body's \"Full Changelog: vX...vY\" diff link, which shows the beta is compared against the latest stable, not the other way around. If the highest stable tag is newer than plugin_version_at_build, flag it: new functions or signature changes may exist that this catalog has not picked up yet, and a rebuild (re-running the fetch+parse pass per update_instructions) is advisable before relying on anything not already in this catalog. Do not treat a newer beta tag alone as drift — wait for it to ship stable."
+    "plugin_version_check": "plugin_version_at_build records the latest STABLE BaseElements Plugin release at the time this catalog was built (v5.1.0.6, published 2026-04-15). To check for drift: GET https://api.github.com/repos/GoyaPtyLtd/BaseElements-Plugin/releases?per_page=20 and find the highest tag whose version string contains no letters after stripping the leading \"v\" (e.g. v5.1.0.6, v5.1.0.5). Tags with a letter suffix (e.g. v5.1.0b3) are beta/pre-release builds despite the API's prerelease flag sometimes reporting false for them — confirm by checking the release body's \"Full Changelog: vX...vY\" diff link, which shows the beta is compared against the latest stable, not the other way around. If the highest stable tag is newer than plugin_version_at_build, flag it: new functions or signature changes may exist that this catalog has not picked up yet, and a rebuild (re-running the fetch+parse pass per update_instructions) is advisable before relying on anything not already in this catalog. Do not treat a newer beta tag alone as drift — wait for it to ship stable.",
+    "last_verified_against_live": "2026-07-05 — all 140 entries (129 active + 11 deprecated) fetched from raw.githubusercontent.com; zero signature mismatches; all 12 doc_bug_note upstream bugs still present; zero commits to docs/ since the previous build; latest stable release still 5.1.0.6.",
+    "enumeration_check": "To detect new functions appearing in docs without a plugin release: GET https://api.github.com/repos/GoyaPtyLtd/BaseElements-Plugin/contents/docs/Functions and count .md files (131 at this build — the 129 active functions plus the non-function pages Constants.md and FunctionTemplate.md), and the same for docs/Functions/Deprecated (11 at this build). A higher count than the stored baseline means pages were added since this catalog was built.",
+    "active_docs_page_count_at_build": 131,
+    "deprecated_docs_page_count_at_build": 11,
+    "constants_source": "https://raw.githubusercontent.com/GoyaPtyLtd/BaseElements-Plugin/main/docs/Functions/Constants.md"
   },
   "categories": {
     "Arrays": {
@@ -6987,5 +6992,91 @@
       "example_code": null,
       "url": "https://raw.githubusercontent.com/GoyaPtyLtd/BaseElements-Plugin/main/docs/Functions/Deprecated/BE_XeroSetTokens.md"
     }
-  ]
+  ],
+  "constants": {
+    "note": "Named constants the plugin registers as zero-parameter functions — use them in calculations instead of magic numbers. Source: Constants.md (see meta.constants_source).",
+    "groups": [
+      {
+        "used_with": "BE_DialogDisplay (return value)",
+        "constants": [
+          {
+            "name": "BE_ButtonOK",
+            "value": 1,
+            "since_version": "1.0.0",
+            "description": "Returned by BE_DialogDisplay when the user clicks the default (OK) button.",
+            "doc_bug_note": "Upstream Constants.md describes this as the alternateButton result — a copy/paste error from the BE_ButtonAlternate row; value 1 is the default/OK button per BE_DialogDisplay's own doc page."
+          },
+          {
+            "name": "BE_ButtonCancel",
+            "value": 2,
+            "since_version": "1.0.0",
+            "description": "Returned by BE_DialogDisplay when the user clicks the cancelButton option."
+          },
+          {
+            "name": "BE_ButtonAlternate",
+            "value": 3,
+            "since_version": "1.0.0",
+            "description": "Returned by BE_DialogDisplay when the user clicks the alternateButton option."
+          }
+        ]
+      },
+      {
+        "used_with": "BE_FileListFolder (type parameter)",
+        "constants": [
+          {
+            "name": "BE_FileTypeAll",
+            "value": 0,
+            "since_version": "1.1.0",
+            "description": "List both files and folders."
+          },
+          {
+            "name": "BE_FileType_File",
+            "value": 1,
+            "since_version": "1.1.0",
+            "description": "List files only. (Upstream name really does mix underscore styles — BE_FileType_File vs BE_FileTypeAll/BE_FileTypeFolder.)"
+          },
+          {
+            "name": "BE_FileTypeFolder",
+            "value": 2,
+            "since_version": "1.1.0",
+            "description": "List folders only."
+          }
+        ]
+      },
+      {
+        "used_with": "BE_MessageDigest (encoding parameter)",
+        "constants": [
+          {
+            "name": "BE_EncodingHex",
+            "value": 1,
+            "since_version": "1.2.0",
+            "description": "Return the digest hex-encoded."
+          },
+          {
+            "name": "BE_EncodingBase64",
+            "value": 2,
+            "since_version": "1.2.0",
+            "description": "Return the digest Base64-encoded."
+          }
+        ]
+      },
+      {
+        "used_with": "BE_MessageDigest (algorithm parameter)",
+        "constants": [
+          {
+            "name": "BE_MessageDigestAlgorithmMD5",
+            "value": 1,
+            "since_version": "1.2.0",
+            "description": "Use the MD5 digest algorithm."
+          },
+          {
+            "name": "BE_MessageDigestAlgorithmMDC2",
+            "value": 4,
+            "since_version": "1.2.0",
+            "description": "Use the MDC2 digest algorithm."
+          }
+        ]
+      }
+    ]
+  }
 }

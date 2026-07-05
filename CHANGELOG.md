@@ -1,5 +1,46 @@
 # CHANGELOG — goya-be-plugin
 
+## v1.3 — 2026-07-05
+
+Full local-to-online verification (clean), plugin constants catalogued, and install
+instructions corrected.
+
+- **Catalog verified against the live source, all levels clean.** Enumeration: the live
+  `docs/Functions/` listing (131 `.md` pages via the GitHub contents API) reconciles exactly —
+  129 catalogued functions plus the two non-function pages (`Constants.md`,
+  `FunctionTemplate.md`); all 11 deprecated pages match 1:1; zero phantoms either direction.
+  Content: all 140 entries fetched from `raw.githubusercontent.com` with zero signature
+  mismatches, and all 12 flagged upstream doc bugs are still present (the corrections remain
+  valid). Zero commits touched `docs/` since the previous build, and the latest stable plugin
+  release is still 5.1.0.6 (`v5.1.0b3` beta correctly excluded by the documented tag filter,
+  which was re-validated live). Verification result recorded in
+  `meta.last_verified_against_live`.
+- **New `constants` block in `function-catalog.json`** — the 10 named constants from the
+  vendor's `Constants.md`, grouped by the function they serve: `BE_DialogDisplay` button
+  results (`BE_ButtonOK`/`BE_ButtonCancel`/`BE_ButtonAlternate`), `BE_FileListFolder` type
+  filters, and `BE_MessageDigest` encoding and algorithm values. New SKILL.md guidance:
+  prefer the named constant over its numeric value in generated calculations. One new
+  upstream doc bug flagged in the same style as the existing twelve: `BE_ButtonOK`'s
+  Constants.md description is a copy/paste of the alternate-button row (value 1 is the
+  default/OK button per `BE_DialogDisplay`'s own page).
+- **New enumeration-drift check documented** (SKILL.md staleness section +
+  `meta.enumeration_check`): one GitHub contents-API call comparing the live docs page count
+  against `meta.active_docs_page_count_at_build` (131) / `meta.deprecated_docs_page_count_at_build`
+  (11) — catches functions documented ahead of a stable release, which the releases-API check
+  can't see.
+- **README Installation section rewritten to the current CadenceUX convention** — leads with
+  the double-click `.skill` method (macOS confirmed; the `.skill` file is the release zip
+  renamed), Customize → Skills zip upload as the fallback. Replaces the previous instructions,
+  which pointed at filesystem paths that aren't how skills install.
+- **SKILL.md `## Licence` attribution line added** — the v1.2 changelog recorded this as done,
+  but only the frontmatter and README actually carried it; the Licence section now ends with
+  the standard line.
+- **New `evals/evals.json`** — four re-runnable test prompts (function lookup + error-check
+  pattern, deprecation steering, constants lookup, currency check).
+- Frontmatter description now mentions constants (trigger coverage for names like
+  `BE_ButtonOK`); function data itself is unchanged — this release adds constants and fixes
+  packaging/convention issues on top of a verified-current catalog.
+
 ## v1.2 — 2026-06-23
 
 Added plugin-version tracking and a staleness-check method, closing the gap with `claris-filemaker-pro`'s `last_known_fm_version` + version-drift pattern. Extended the reference JSON with corrected function data and attribution fixes (2026-06-30).

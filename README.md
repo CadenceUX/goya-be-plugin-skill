@@ -12,6 +12,7 @@ When this skill is active, Claude will:
 
 - Look up any of the **129 active `BE_` functions** by name or category — with full description, structured parameters (including optional/default flags), keywords, version history, platform compatibility, and example code where available
 - Recognise and steer away from the **11 deprecated, renamed, or removed functions**, pointing to the correct native FileMaker or plugin replacement
+- Resolve the plugin's **named constants** (dialog button results, `BE_FileListFolder` type filters, `BE_MessageDigest` encoding/algorithm values) so generated calculations use `BE_ButtonOK` rather than a magic `1`
 - Flag known **upstream documentation bugs** rather than silently trusting them — several of Goya's own doc pages have a signature line naming the wrong function (a copy/paste error); these are corrected in the catalog and noted via `doc_bug_note`
 - Check for **plugin version drift** on request — the catalog tracks the latest *stable* BaseElements Plugin release at build time (`plugin_version_at_build`) and knows how to query GitHub's releases API to see if a newer stable release has shipped since
 - Apply critical usage patterns baked into `SKILL.md` — HTTP/FTP/SMTP error-checking sequences, native OS file paths vs. FileMaker paths, the stack/variable helper functions, and more
@@ -22,7 +23,7 @@ When this skill is active, Claude will:
 
 | Reference file | Contents |
 |---|---|
-| `function-catalog.json` | All 129 active functions across 18 categories, plus 11 deprecated/renamed/removed entries. Each entry: `signature`, `description`, `parameters` (structured), `keywords`, `version_history`, `notes`, `compatibility`, `example_code`, and `url` (raw `.md` source). |
+| `function-catalog.json` | All 129 active functions across 18 categories, plus 11 deprecated/renamed/removed entries and the plugin's 10 named constants (from the vendor's `Constants.md`). Each function entry: `signature`, `description`, `parameters` (structured), `keywords`, `version_history`, `notes`, `compatibility`, `example_code`, and `url` (raw `.md` source). |
 
 **Categories:** Arrays, Clipboard, Containers, Data Manipulation, Dialogs, Encoding and Encryption, Error Checking, Files and Folders, HTTP and URLs, Miscellaneous, PDF, Preferences, SMTP Email, Time, Value Lists, Vectors, XML/XSLT/JSON, Zip and Gzip.
 
@@ -30,13 +31,14 @@ When this skill is active, Claude will:
 
 ## Installation
 
-1. Download the latest release zip
-2. Unzip and place the `goya-be-plugin` folder in your Claude skills directory:
-   - **macOS:** `~/Library/Application Support/Claude/skills/`
-   - **Windows:** `%APPDATA%\Claude\skills\`
-3. Restart Claude or reload skills
+**macOS (Claude desktop app):** double-click the `goya-be-plugin-v1.3.skill` file — it opens
+Claude's skill-install flow directly. (The `.skill` file is just the release zip renamed.)
 
-The skill is then active for any conversation referencing a `BE_` function, the BaseElements plugin, or plugin-based HTTP/file/XML/email operations in FileMaker.
+**Claude.ai in a browser (or if double-click doesn't work):** upload the release zip via
+Settings → Customize → Skills.
+
+The skill is then active for any conversation referencing a `BE_` function or constant, the
+BaseElements plugin, or plugin-based HTTP/file/XML/email operations in FileMaker.
 
 ---
 

@@ -1,0 +1,21 @@
+{
+  "description": "Test prompts for goya-be-plugin. Each case exercises the catalog lookup path plus one behaviour the skill must surface (deprecation steering, constants, error-check patterns, doc-bug awareness).",
+  "cases": [
+    {
+      "prompt": "What are the parameters of BE_HTTP_POST and how do I check whether the call failed?",
+      "expected": "Returns the signature and structured parameters from the catalog entry, and applies the SKILL.md error-check sequence: BE_GetLastError (curl code) then BE_HTTP_ResponseCode, checked immediately after the call."
+    },
+    {
+      "prompt": "My old script uses BE_JSONPath — is that still fine?",
+      "expected": "Finds status deprecated in the catalog's deprecated array and steers to the native FileMaker replacement (JSONGetElement) rather than endorsing it for new code."
+    },
+    {
+      "prompt": "What value does BE_DialogDisplay return when the user clicks Cancel?",
+      "expected": "Resolves from the catalog's constants block: BE_ButtonCancel = 2, recommending the named constant over the numeric value — and does not repeat the upstream copy/paste error on the BE_ButtonOK description."
+    },
+    {
+      "prompt": "Is the BaseElements plugin catalog in this skill current?",
+      "expected": "Runs the documented checks: latest stable release from the GitHub releases API (excluding letter-suffixed beta tags like v5.1.0b3 regardless of the prerelease flag) compared against meta.plugin_version_at_build, and optionally the docs page-count enumeration check against meta.active_docs_page_count_at_build."
+    }
+  ]
+}
