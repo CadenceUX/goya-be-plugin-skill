@@ -10,7 +10,7 @@ Built and maintained by [Darrin Southern](https://www.linkedin.com/in/darrin-sou
 
 When this skill is active, Claude will:
 
-- Look up any of the **129 active `BE_` functions** by name or category — with full description, structured parameters (including optional/default flags), keywords, version history, platform compatibility, and example code where available
+- Look up any of the **active `BE_` functions** by name or category — with full description, structured parameters (including optional/default flags), keywords, version history, platform compatibility, and example code where available
 - Recognise and steer away from the **11 deprecated, renamed, or removed functions**, pointing to the correct native FileMaker or plugin replacement
 - Resolve the plugin's **named constants** (dialog button results, `BE_FileListFolder` type filters, `BE_MessageDigest` encoding/algorithm values) so generated calculations use `BE_ButtonOK` rather than a magic `1`
 - Flag known **upstream documentation bugs** rather than silently trusting them — several of Goya's own doc pages have a signature line naming the wrong function (a copy/paste error); these are corrected in the catalog and noted via `doc_bug_note`
@@ -29,18 +29,22 @@ When this skill is active, Claude will:
 
 ---
 
-## Installation
+## Install
 
-**macOS (Claude desktop app):** double-click the `goya-be-plugin-v1.3.skill` file — it opens
-Claude's skill-install flow directly. (The `.skill` file is just the release zip renamed.)
+**Claude Code** (from the `cadenceux` plugin marketplace):
 
-**Claude.ai in a browser (or if double-click doesn't work):** upload the release zip via
-Settings → Customize → Skills.
+```bash
+claude plugin marketplace add https://github.com/CadenceUX/cadenceux-skills.git
+claude plugin install goya-be-plugin@cadenceux
+```
 
-The skill is then active for any conversation referencing a `BE_` function or constant, the
-BaseElements plugin, or plugin-based HTTP/file/XML/email operations in FileMaker.
+**claude.ai and Cowork:** Customize → Plugins → Add marketplace from GitHub →
+`CadenceUX/cadenceux-skills`, then install **goya-be-plugin**.
 
----
+**Claude desktop app (macOS):** download `goya-be-plugin-v1.4.0.skill` from the
+[latest release](https://github.com/CadenceUX/goya-be-plugin-skill/releases) and double-click it.
+
+**Claude.ai in a browser, as a single skill:** Customize → Skills → upload the release `.zip`.
 
 ## How it works
 

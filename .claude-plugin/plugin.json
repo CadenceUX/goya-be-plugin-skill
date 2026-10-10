@@ -1,0 +1,23 @@
+{
+  "name": "goya-be-plugin",
+  "displayName": "BaseElements Plugin Reference",
+  "version": "1.4.0",
+  "description": "Reference for the free, open-source BaseElements FileMaker plug-in by Goya: every BE_ function and constant with signatures, platform support, version history and deprecations.",
+  "author": {
+    "name": "Darrin Southern",
+    "url": "https://cadenceux.com.au"
+  },
+  "homepage": "https://github.com/CadenceUX/goya-be-plugin-skill",
+  "repository": "https://github.com/CadenceUX/goya-be-plugin-skill",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "filemaker",
+    "claris",
+    "baseelements",
+    "goya",
+    "plugin"
+  ],
+  "skills": [
+    "./"
+  ]
+}

@@ -1,5 +1,19 @@
 # CHANGELOG — goya-be-plugin
 
+## [1.4.0] — 2026-10-11
+
+Data check and update to Anthropic's skill authoring best practices, using `cadenceux-skill-creator` 2.0.0.
+
+### Verified current (2026-10-11)
+
+- Latest stable BaseElements release is still **5.1.0.6** (2026-04-15); `v5.1.0b3` is a beta and not drift.
+- `docs/Functions` holds 131 pages and `docs/Functions/Deprecated` 11, matching `active_docs_page_count_at_build` and `deprecated_docs_page_count_at_build`. No enumeration drift.
+
+### Changed
+
+- Frontmatter to the CadenceUX standard: third-person description with "Use when" and "Not for", no function count, `license: CC-BY-4.0`, `metadata.author`, three-part version.
+- `.claude-plugin/plugin.json` added for the `cadenceux` marketplace.
+
 ## v1.3 — 2026-07-05
 
 Full local-to-online verification (clean), plugin constants catalogued, and install

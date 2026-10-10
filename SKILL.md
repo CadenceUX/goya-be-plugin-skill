@@ -1,22 +1,20 @@
 ---
-compatibility: Claude.ai, Claude Chat, Claude Code
-metadata:
-  "Built and maintained": "Darrin Southern from CadenceUX"
-  version: "1.3"
 name: goya-be-plugin
-description: |
-  Reference skill for the BaseElements Plugin by Goya Pty Ltd — a free, open-source
-  FileMaker Pro plugin with 129 active functions covering file I/O, HTTP/curl, SMTP,
-  XML/XSLT, JSON, PDF, encryption, clipboard, containers, value lists, arrays, regex,
-  JavaScript evaluation, and vector similarity, plus the plugin's named constants
-  (BE_ButtonOK, BE_FileTypeFolder, encoding and digest-algorithm values). Includes
-  deprecated and renamed functions with their replacements. Use whenever any BE_
-  function or constant name appears in a FileMaker calculation or script, or when the
-  user asks about BaseElements, the BE plugin, or plugin-based HTTP, file, XML, or
-  email operations in FileMaker. The reference file is a JSON catalog
-  (references/function-catalog.json) — each function entry includes its signature,
-  notes, and a direct GitHub doc URL for live fetching. Do not use for MBS Plugin or
-  other FileMaker plugins.
+description: >-
+  Reference for the BaseElements plug-in by Goya, a free, open-source FileMaker plug-in: every
+  BE_ function and constant with its signature, parameters, platform support, version history
+  and examples, including deprecated and renamed functions with their replacements. Covers
+  files and folders, HTTP and curl, SMTP email, XML and XSLT, JSON, PDF, encryption and
+  hashing, containers, value lists, arrays, regular expressions, JavaScript and vector
+  similarity. Use whenever a BE_ function or constant appears in a FileMaker calculation or
+  script, or when asked about BaseElements or plug-in-based HTTP, file, XML or email work in
+  FileMaker. Not for the MBS (monkeybread-mbs-plugin) or bBox (beezwax-bbox-plugin) plug-ins.
+license: CC-BY-4.0
+compatibility: >-
+  Claude.ai, Claude Desktop, Cowork and Claude Code.
+metadata:
+  author: Darrin Southern, CadenceUX
+  version: "1.4.0"
 ---
 
 # BaseElements Plugin — Reference Skill
@@ -113,7 +111,7 @@ run once:
 
 1. Fetch `https://github.com/CadenceUX/goya-be-plugin-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.3"`)
+3. Compare with this skill's installed version (currently `"1.4.0"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**

@@ -17,5 +17,6 @@
       "prompt": "Is the BaseElements plugin catalog in this skill current?",
       "expected": "Runs the documented checks: latest stable release from the GitHub releases API (excluding letter-suffixed beta tags like v5.1.0b3 regardless of the prerelease flag) compared against meta.plugin_version_at_build, and optionally the docs page-count enumeration check against meta.active_docs_page_count_at_build."
     }
-  ]
+  ],
+  "version": "1.4.0"
 }
