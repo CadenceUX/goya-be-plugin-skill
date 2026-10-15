@@ -31,17 +31,6 @@ When this skill is active, Claude will:
 
 ## Install
 
-**Claude desktop app (macOS):** download [`goya-be-plugin.skill`](https://github.com/CadenceUX/goya-be-plugin-skill/releases/latest/download/goya-be-plugin.skill) and
-double-click it.
-
-**Claude.ai in a browser, or Claude Desktop → Customize → Skills → upload:** download
-[`goya-be-plugin.zip`](https://github.com/CadenceUX/goya-be-plugin-skill/releases/latest/download/goya-be-plugin.zip) and upload it.
-
-> Use the files above, which are attached to the latest
-> [release](https://github.com/CadenceUX/goya-be-plugin-skill/releases). Don't use GitHub's green
-> **Code → Download ZIP** button or a release's **Source code (zip)**: those are snapshots of
-> the repository, not a packaged skill, and Claude won't install them as one.
-
 **Claude Code** (from the `cadenceux` plugin marketplace):
 
 ```bash
@@ -49,8 +38,19 @@ claude plugin marketplace add https://github.com/CadenceUX/cadenceux-skills.git
 claude plugin install goya-be-plugin@cadenceux
 ```
 
-**Cowork, or claude.ai as a plugin:** Customize → Plugins → Add marketplace from GitHub →
+**claude.ai and Cowork:** Customize → Plugins → Add marketplace from GitHub →
 `CadenceUX/cadenceux-skills`, then install **goya-be-plugin**.
+
+**Claude desktop app (macOS):** download [`goya-be-plugin.skill`](https://github.com/CadenceUX/goya-be-plugin-skill/releases/latest/download/goya-be-plugin.skill) and
+double-click it.
+
+**Claude.ai in a browser, as a single skill:** Customize → Skills → upload
+[`goya-be-plugin.zip`](https://github.com/CadenceUX/goya-be-plugin-skill/releases/latest/download/goya-be-plugin.zip).
+
+> Both files are attached to the latest [release](https://github.com/CadenceUX/goya-be-plugin-skill/releases).
+> Don't use GitHub's green **Code → Download ZIP** button or a release's **Source code (zip)**:
+> those are snapshots of the repository, not a packaged skill, and Claude won't install them
+> as one.
 
 ## How it works
 

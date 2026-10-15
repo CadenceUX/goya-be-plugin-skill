@@ -1,7 +1,7 @@
 {
   "name": "goya-be-plugin",
   "displayName": "BaseElements Plugin Reference",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Reference for the free, open-source BaseElements FileMaker plug-in by Goya: every BE_ function and constant with signatures, platform support, version history and deprecations.",
   "author": {
     "name": "Darrin Southern",

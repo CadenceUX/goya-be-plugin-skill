@@ -14,7 +14,7 @@ compatibility: >-
   Claude.ai, Claude Desktop, Cowork and Claude Code.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "1.4.0"
+  version: "1.4.1"
 ---
 
 # BaseElements Plugin — Reference Skill
@@ -111,7 +111,7 @@ run once:
 
 1. Fetch `https://github.com/CadenceUX/goya-be-plugin-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.4.0"`)
+3. Compare with this skill's installed version (currently `"1.4.1"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**
