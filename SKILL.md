@@ -14,7 +14,7 @@ compatibility: >-
   Claude.ai, Claude Desktop, Cowork and Claude Code.
 metadata:
   author: Darrin Southern, CadenceUX
-  version: "1.4.1"
+  version: "1.4.2"
 ---
 
 # BaseElements Plugin — Reference Skill
@@ -29,7 +29,7 @@ metadata:
 
 The function reference is in `references/function-catalog.json`. As of v1.1 each entry is self-contained — `name`, `signature`, `description`, structured `parameters` (name, optional flag, default, description), `keywords`, `version_history`, `notes`, `compatibility` (per-platform support), `example_code` (verbatim, may be `null`), and `url` (the raw `.md` source for cross-checking). No need to fetch the URL for routine use — it's only needed to verify against the live page or pick up changes since the last refresh.
 
-Some entries carry a `doc_bug_note` field — these are cases where Goya's own doc page has a signature line naming a different function than its heading/filename (a copy/paste error upstream). The function name has been corrected in the entry; the note preserves what was actually on the page.
+Some entries carry a `doc_bug_note` field: Goya's own doc page has an error the catalog works around (a signature or heading naming a different function, or an unmatched brace). The entry holds the corrected form; the note records what the page actually says, so a mismatch with the live page isn't mistaken for catalog drift. Goya fixed most of the originally flagged pages in July 2026; `meta.last_verified_against_live` lists which are still open.
 
 Deprecated functions have `status: "deprecated"`, renamed functions have `status: "renamed"`, and fully removed functions have `status: "removed"`. Check the deprecated array before suggesting any legacy BE_ function.
 
@@ -41,6 +41,16 @@ branching on `BE_DialogDisplay`'s result), file-type filters for `BE_FileListFol
 digest-algorithm values for `BE_MessageDigest`. Prefer the named constant over its numeric
 value in generated calculations. Note the upstream doc bug flagged on `BE_ButtonOK` (its
 Constants.md description is a copy/paste of the alternate-button row).
+
+
+## Requirements
+
+| Kind | Name | Used for | Surfaces |
+|---|---|---|---|
+| API | `api.github.com` (public, no key) | Plugin release and docs page-count checks, on request | Any surface that can fetch |
+| API | `raw.githubusercontent.com` (public, no key) | Live doc pages, and this skill's own version check | Any surface that can fetch |
+
+Routine lookups need neither: they read `references/function-catalog.json`.
 
 ---
 
@@ -111,7 +121,7 @@ run once:
 
 1. Fetch `https://github.com/CadenceUX/goya-be-plugin-skill/raw/main/VERSION`
 2. Parse the returned string as the latest available version
-3. Compare with this skill's installed version (currently `"1.4.1"`)
+3. Compare with this skill's installed version (currently `"1.4.2"`)
 4. If latest > installed, prepend this notice to your first response:
 
    > ⚠️ **Skill update available**
@@ -199,10 +209,10 @@ BE functions use **native OS paths** (POSIX on Mac/Linux, backslash on Windows),
 
 ```filemaker
 # Wrong — raw FileMaker path
-"/Macintosh HD/Users/nick/Desktop/file.txt"   // FM display path, not a plugin path
+"/Macintosh HD/Users/you/Desktop/file.txt"   // FM display path, not a plugin path
 
 # Right — POSIX path
-"/Users/nick/Desktop/file.txt"
+"/Users/you/Desktop/file.txt"
 
 # Converting temp folder path
 Substitute ( Get ( TemporaryPath ) ; "file:/" ; "/" ) & "file.txt"

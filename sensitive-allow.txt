@@ -1,0 +1,6 @@
+# Reviewed values the validator may skip. All are verbatim from Goya's public BaseElements
+# docs (example code on the vendor's own pages), not real accounts or machines.
+/Users/nick
+me@me.com
+you@you.com
+replyto@me.com

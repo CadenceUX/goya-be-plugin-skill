@@ -1,5 +1,41 @@
 # CHANGELOG — goya-be-plugin
 
+## [1.4.2] — 2026-11-18
+
+Data check against the live docs, using `cadenceux-skill-creator` 2.4.0. Plugin still 5.1.0.6.
+
+### Fixed
+
+- **`BE_VersionAutoUpdate` had the wrong signature.** Its vendor page is headed and signed
+  `BE_Version` (a copy/paste error upstream), and the catalog had copied that signature
+  without a flag. The entry now reads `BE_VersionAutoUpdate` and carries a `doc_bug_note`.
+
+### Changed
+
+- **Stale doc-bug notes removed.** Goya fixed 11 of the flagged pages on 2026-07-20:
+  `BE_FileSelectDialog`, `BE_FolderSelectDialog`, `BE_Encrypt_AES`, `BE_HTTP_GET`,
+  `BE_HTTP_GET_File`, `BE_HTTP_PUTFile`, `BE_HTTP_Set_Proxy`, `BE_SMTPServer`,
+  `BE_JSON_ArraySize`, `BE_XSLTApply` and `BE_Unzip`. Their `doc_bug_note` fields and
+  matching notes are gone; the catalog data itself was already correct. Still flagged:
+  `BE_SignatureVerifyRSA` (unmatched brace), `BE_VersionAutoUpdate` and the `BE_ButtonOK` row
+  in `Constants.md`.
+- SKILL.md and README describe the doc-bug notes as they now stand.
+- New `## Requirements` section (the public GitHub APIs the checks use), and the file-path
+  example uses `/Users/you/…` instead of a personal-looking name. `sensitive-allow.txt` lists
+  the example paths and emails that appear verbatim in Goya's own doc examples, so the
+  validator's personal-data scan passes.
+- `meta.version` and `meta.last_updated` brought up to date (they still read v1.3 and
+  2026-07-05).
+
+### Verified current (2026-11-18)
+
+- Latest stable release is still **5.1.0.6**; `v5.1.0b3` is a beta and not drift.
+- `docs/Functions` holds 131 pages and `docs/Functions/Deprecated` 11, matching the build
+  counts. All 142 pages fetched and compared with the catalog by signature, parameter names
+  and version history: no differences beyond the fixes above.
+- Evals on Haiku: 5/5 (`evals/results-2026-11-18.md`). The new case also ran against the
+  released 1.4.1, whose wrong signature Haiku had to second-guess.
+
 ## [1.4.1] — 2026-10-16
 
 Packaging fix for GitHub installs, using `cadenceux-skill-creator` 2.1.2. No change to the

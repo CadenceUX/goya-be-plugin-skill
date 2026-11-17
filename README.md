@@ -13,7 +13,7 @@ When this skill is active, Claude will:
 - Look up any of the **active `BE_` functions** by name or category — with full description, structured parameters (including optional/default flags), keywords, version history, platform compatibility, and example code where available
 - Recognise and steer away from the **11 deprecated, renamed, or removed functions**, pointing to the correct native FileMaker or plugin replacement
 - Resolve the plugin's **named constants** (dialog button results, `BE_FileListFolder` type filters, `BE_MessageDigest` encoding/algorithm values) so generated calculations use `BE_ButtonOK` rather than a magic `1`
-- Flag known **upstream documentation bugs** rather than silently trusting them — several of Goya's own doc pages have a signature line naming the wrong function (a copy/paste error); these are corrected in the catalog and noted via `doc_bug_note`
+- Flag known **upstream documentation bugs** rather than silently trusting them — where one of Goya's own doc pages is still wrong (a signature naming another function, an unmatched brace), the catalog holds the corrected form and notes the page's text in `doc_bug_note`
 - Check for **plugin version drift** on request — the catalog tracks the latest *stable* BaseElements Plugin release at build time (`plugin_version_at_build`) and knows how to query GitHub's releases API to see if a newer stable release has shipped since
 - Apply critical usage patterns baked into `SKILL.md` — HTTP/FTP/SMTP error-checking sequences, native OS file paths vs. FileMaker paths, the stack/variable helper functions, and more
 
@@ -64,7 +64,8 @@ Use the raw `raw.githubusercontent.com` URLs, not the rendered `github.com` HTML
 
 A handful of things in Goya's own documentation are worth knowing about if you're cross-checking against the live site:
 
-- **Copy/paste signature bugs** — `BE_Encrypt_AES`, `BE_HTTP_GET_File`, `BE_HTTP_PUTFile`, `BE_HTTP_Set_Proxy`, `BE_VersionAutoUpdate`, and `BE_XSLTApply` each have a doc page whose code-block signature names a *different* function than the page's own heading/filename. The catalog corrects the function name and flags it via `doc_bug_note`.
+- **Heading and signature copied from another page** — `BE_VersionAutoUpdate`'s doc page is headed and signed `BE_Version`. The catalog corrects the function name and flags it via `doc_bug_note`. (Goya fixed the same kind of bug on `BE_Encrypt_AES`, `BE_HTTP_GET_File`, `BE_HTTP_PUTFile`, `BE_HTTP_Set_Proxy` and `BE_XSLTApply`, plus five parameter-name typos, in July 2026.)
+- **`BE_ButtonOK` description** — the `Constants.md` row for `BE_ButtonOK` repeats the alternate-button description; value 1 is the default (OK) button.
 - **Unmatched brace** — `BE_SignatureVerifyRSA`'s signature line opens `{` but closes with `)` instead of `}`. Left as-is in the catalog rather than guessed at.
 - **Beta tags can look like the latest release** — GitHub's `prerelease` flag isn't reliable for this repo; e.g. `v5.1.0b3` reports `prerelease: false` despite being a beta built on top of the actual latest stable, `v5.1.0.6`. Confirm by checking the release body's `Full Changelog` diff link rather than trusting the flag or publish date alone.
 
